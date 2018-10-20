@@ -1,0 +1,36 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/root/.nvm/versions/node/v10.12.0/bin/node',
+1 verbose cli   '/root/.nvm/versions/node/v10.12.0/bin/npm',
+1 verbose cli   'install',
+1 verbose cli   'apollo-server-express',
+1 verbose cli   'body-parser',
+1 verbose cli   'express',
+1 verbose cli   'graphql',
+1 verbose cli   'graphql-tools' ]
+2 info using npm@6.4.1
+3 info using node@v10.12.0
+4 verbose config Skipping project config: /root/.npmrc. (matches userconfig)
+5 verbose npm-session 2fdcf33a4e73bfb6
+6 silly install loadCurrentTree
+7 silly install readLocalPackageData
+8 timing stage:rollbackFailedOptional Completed in 2ms
+9 timing stage:runTopLevelLifecycles Completed in 156ms
+10 verbose stack Error: Failed to parse json
+10 verbose stack Unexpected end of JSON input while parsing near ''
+10 verbose stack     at parseError (/root/.nvm/versions/node/v10.12.0/lib/node_modules/npm/node_modules/read-package-json/read-json.js:452:11)
+10 verbose stack     at parseJson (/root/.nvm/versions/node/v10.12.0/lib/node_modules/npm/node_modules/read-package-json/read-json.js:104:26)
+10 verbose stack     at /root/.nvm/versions/node/v10.12.0/lib/node_modules/npm/node_modules/read-package-json/read-json.js:51:5
+10 verbose stack     at /root/.nvm/versions/node/v10.12.0/lib/node_modules/npm/node_modules/graceful-fs/graceful-fs.js:78:16
+10 verbose stack     at FSReqWrap.readFileAfterClose [as oncomplete] (internal/fs/read_file_context.js:53:3)
+11 verbose cwd /root
+12 verbose Linux 4.15.0-36-generic
+13 verbose argv "/root/.nvm/versions/node/v10.12.0/bin/node" "/root/.nvm/versions/node/v10.12.0/bin/npm" "install" "apollo-server-express" "body-parser" "express" "graphql" "graphql-tools"
+14 verbose node v10.12.0
+15 verbose npm  v6.4.1
+16 error file /root/package.json
+17 error code EJSONPARSE
+18 error JSON.parse Failed to parse json
+18 error JSON.parse Unexpected end of JSON input while parsing near ''
+19 error JSON.parse Failed to parse package.json data.
+19 error JSON.parse package.json must be actual JSON, not just JavaScript.
+20 verbose exit [ 1, true ]
