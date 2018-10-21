@@ -1,4 +1,4 @@
-node_modules/
-.nvm/
-.npm/
-.ssh/
+/node_modules
+/.nvm
+/.npm
+/.ssh
