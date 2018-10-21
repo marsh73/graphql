@@ -7,18 +7,26 @@ const {
 // the GraphQL server for.  A more complete example might fetch
 // from an existing data source like a REST API or database.
 const books = [{
-    title: 'Harry Potter and the Chamber of Secrets',
-    author: 'J.K. Rowling',
-  },
-  {
-    title: 'Jurassic Park',
-    author: 'Michael Crichton',
-  },
+  title: 'Harry Potter and the Chamber of Secrets',
+  author: 'J.K. Rowling',
+},
+{
+  title: 'Jurassic Park',
+  author: 'Michael Crichton',
+},
+];
+
+const peeps = [{
+  name: 'marsh',
+},
+{
+  name: 'cat',
+},
 ];
 
 // Type definitions define the "shape" of your data and specify
 // which ways the data can be fetched from the GraphQL server.
-const typeDefs = gql `
+const typeDefs = gql`
   # Comments in GraphQL are defined with the hash (#) symbol.
 
   # This "Book" type can be used in other type declarations.
@@ -27,10 +35,15 @@ const typeDefs = gql `
     author: String
   }
 
+  type Peep {
+    name: String
+  }
+
   # The "Query" type is the root of all GraphQL queries.
   # (A "Mutation" type will be covered later on.)
   type Query {
     books: [Book]
+    peeps: [Peep]
   }
 `;
 
@@ -39,6 +52,7 @@ const typeDefs = gql `
 const resolvers = {
   Query: {
     books: () => books,
+    peeps: () => peeps
   },
 };
 
