@@ -11,6 +11,8 @@
 # hlsearch on (H) or off (h):
 ~h
 # Command Line History (newest to oldest):
+:wq!
+|2,0,1540139361,,"wq!"
 :wq
 |2,0,1540077976,,"wq"
 :q!
@@ -62,28 +64,34 @@
 |3,0,5,1,1,0,1540058986,"~"
 
 # File marks:
-'0  1  0  ~/README.md
-|4,48,1,0,1540077976,"~/README.md"
-'1  1  0  ~/.gitignore
-|4,49,1,0,1540077757,"~/.gitignore"
-'2  1  0  ~/hooks/post-update.sample
-|4,50,1,0,1540077569,"~/hooks/post-update.sample"
-'3  1  0  ~/package.json
-|4,51,1,0,1540061198,"~/package.json"
-'4  286  0  ~/server.js
-|4,52,286,0,1540060889,"~/server.js"
-'5  1  0  ~/server.js
-|4,53,1,0,1540060889,"~/server.js"
-'6  1  0  ~/package.json
-|4,54,1,0,1540059295,"~/package.json"
-'7  27  76  ~/server.js
-|4,55,27,76,1540059223,"~/server.js"
-'8  1  75  ~/server.js
-|4,56,1,75,1540059105,"~/server.js"
-'9  13  75  ~/server.js
-|4,57,13,75,1540059105,"~/server.js"
+'0  5  12  ~/.gitignore
+|4,48,5,12,1540139361,"~/.gitignore"
+'1  1  0  ~/README.md
+|4,49,1,0,1540077976,"~/README.md"
+'2  1  0  ~/.gitignore
+|4,50,1,0,1540077757,"~/.gitignore"
+'3  1  0  ~/.gitignore
+|4,51,1,0,1540077757,"~/.gitignore"
+'4  1  0  ~/hooks/post-update.sample
+|4,52,1,0,1540077569,"~/hooks/post-update.sample"
+'5  1  0  ~/package.json
+|4,53,1,0,1540061198,"~/package.json"
+'6  286  0  ~/server.js
+|4,54,286,0,1540060889,"~/server.js"
+'7  1  0  ~/server.js
+|4,55,1,0,1540060889,"~/server.js"
+'8  1  0  ~/package.json
+|4,56,1,0,1540059295,"~/package.json"
+'9  27  76  ~/server.js
+|4,57,27,76,1540059223,"~/server.js"
 
 # Jumplist (newest first):
+-'  5  12  ~/.gitignore
+|4,39,5,12,1540139361,"~/.gitignore"
+-'  1  0  ~/.gitignore
+|4,39,1,0,1540139325,"~/.gitignore"
+-'  1  0  ~/README.md
+|4,39,1,0,1540077976,"~/README.md"
 -'  1  0  ~/README.md
 |4,39,1,0,1540077976,"~/README.md"
 -'  1  0  ~/.gitignore
@@ -98,6 +106,30 @@
 |4,39,1,0,1540077569,"~/hooks/post-update.sample"
 -'  1  0  ~/hooks/post-update.sample
 |4,39,1,0,1540077569,"~/hooks/post-update.sample"
+-'  1  0  ~/hooks/post-update.sample
+|4,39,1,0,1540077569,"~/hooks/post-update.sample"
+-'  1  0  ~/hooks/post-update.sample
+|4,39,1,0,1540077569,"~/hooks/post-update.sample"
+-'  1  0  ~/hooks/post-update.sample
+|4,39,1,0,1540077569,"~/hooks/post-update.sample"
+-'  1  0  ~/hooks/post-update.sample
+|4,39,1,0,1540077569,"~/hooks/post-update.sample"
+-'  1  0  ~/package.json
+|4,39,1,0,1540061198,"~/package.json"
+-'  1  0  ~/package.json
+|4,39,1,0,1540061198,"~/package.json"
+-'  1  0  ~/package.json
+|4,39,1,0,1540061198,"~/package.json"
+-'  1  0  ~/package.json
+|4,39,1,0,1540061198,"~/package.json"
+-'  1  0  ~/package.json
+|4,39,1,0,1540061198,"~/package.json"
+-'  1  0  ~/package.json
+|4,39,1,0,1540061198,"~/package.json"
+-'  1  0  ~/package.json
+|4,39,1,0,1540061198,"~/package.json"
+-'  1  0  ~/package.json
+|4,39,1,0,1540061198,"~/package.json"
 -'  1  0  ~/package.json
 |4,39,1,0,1540061198,"~/package.json"
 -'  1  0  ~/package.json
@@ -178,6 +210,70 @@
 |4,39,286,0,1540060889,"~/server.js"
 -'  1  0  ~/server.js
 |4,39,1,0,1540060889,"~/server.js"
+-'  286  0  ~/server.js
+|4,39,286,0,1540060889,"~/server.js"
+-'  1  0  ~/server.js
+|4,39,1,0,1540060889,"~/server.js"
+-'  286  0  ~/server.js
+|4,39,286,0,1540060889,"~/server.js"
+-'  1  0  ~/server.js
+|4,39,1,0,1540060889,"~/server.js"
+-'  286  0  ~/server.js
+|4,39,286,0,1540060889,"~/server.js"
+-'  1  0  ~/server.js
+|4,39,1,0,1540060889,"~/server.js"
+-'  286  0  ~/server.js
+|4,39,286,0,1540060889,"~/server.js"
+-'  1  0  ~/server.js
+|4,39,1,0,1540060889,"~/server.js"
+-'  286  0  ~/server.js
+|4,39,286,0,1540060889,"~/server.js"
+-'  1  0  ~/server.js
+|4,39,1,0,1540060889,"~/server.js"
+-'  286  0  ~/server.js
+|4,39,286,0,1540060889,"~/server.js"
+-'  1  0  ~/server.js
+|4,39,1,0,1540060889,"~/server.js"
+-'  286  0  ~/server.js
+|4,39,286,0,1540060889,"~/server.js"
+-'  1  0  ~/server.js
+|4,39,1,0,1540060889,"~/server.js"
+-'  286  0  ~/server.js
+|4,39,286,0,1540060889,"~/server.js"
+-'  1  0  ~/server.js
+|4,39,1,0,1540060889,"~/server.js"
+-'  286  0  ~/server.js
+|4,39,286,0,1540060889,"~/server.js"
+-'  1  0  ~/server.js
+|4,39,1,0,1540060889,"~/server.js"
+-'  286  0  ~/server.js
+|4,39,286,0,1540060889,"~/server.js"
+-'  1  0  ~/server.js
+|4,39,1,0,1540060889,"~/server.js"
+-'  286  0  ~/server.js
+|4,39,286,0,1540060889,"~/server.js"
+-'  1  0  ~/server.js
+|4,39,1,0,1540060889,"~/server.js"
+-'  286  0  ~/server.js
+|4,39,286,0,1540060889,"~/server.js"
+-'  1  0  ~/server.js
+|4,39,1,0,1540060889,"~/server.js"
+-'  286  0  ~/server.js
+|4,39,286,0,1540060889,"~/server.js"
+-'  1  0  ~/server.js
+|4,39,1,0,1540060889,"~/server.js"
+-'  286  0  ~/server.js
+|4,39,286,0,1540060889,"~/server.js"
+-'  1  0  ~/server.js
+|4,39,1,0,1540060889,"~/server.js"
+-'  286  0  ~/server.js
+|4,39,286,0,1540060889,"~/server.js"
+-'  1  0  ~/server.js
+|4,39,1,0,1540060889,"~/server.js"
+-'  286  0  ~/server.js
+|4,39,286,0,1540060889,"~/server.js"
+-'  1  0  ~/server.js
+|4,39,1,0,1540060889,"~/server.js"
 -'  1  0  ~/package.json
 |4,39,1,0,1540059295,"~/package.json"
 -'  1  0  ~/package.json
@@ -190,109 +286,18 @@
 |4,39,1,0,1540059295,"~/package.json"
 -'  1  0  ~/package.json
 |4,39,1,0,1540059295,"~/package.json"
--'  1  0  ~/package.json
-|4,39,1,0,1540059295,"~/package.json"
--'  1  0  ~/package.json
-|4,39,1,0,1540059295,"~/package.json"
--'  27  76  ~/server.js
-|4,39,27,76,1540059223,"~/server.js"
--'  27  76  ~/server.js
-|4,39,27,76,1540059223,"~/server.js"
--'  27  76  ~/server.js
-|4,39,27,76,1540059223,"~/server.js"
--'  27  76  ~/server.js
-|4,39,27,76,1540059223,"~/server.js"
--'  27  76  ~/server.js
-|4,39,27,76,1540059223,"~/server.js"
--'  27  76  ~/server.js
-|4,39,27,76,1540059223,"~/server.js"
--'  27  76  ~/server.js
-|4,39,27,76,1540059223,"~/server.js"
--'  27  76  ~/server.js
-|4,39,27,76,1540059223,"~/server.js"
--'  27  76  ~/server.js
-|4,39,27,76,1540059223,"~/server.js"
--'  27  76  ~/server.js
-|4,39,27,76,1540059223,"~/server.js"
--'  27  76  ~/server.js
-|4,39,27,76,1540059223,"~/server.js"
--'  27  76  ~/server.js
-|4,39,27,76,1540059223,"~/server.js"
--'  27  76  ~/server.js
-|4,39,27,76,1540059223,"~/server.js"
--'  27  76  ~/server.js
-|4,39,27,76,1540059223,"~/server.js"
--'  27  76  ~/server.js
-|4,39,27,76,1540059223,"~/server.js"
--'  27  76  ~/server.js
-|4,39,27,76,1540059223,"~/server.js"
--'  27  76  ~/server.js
-|4,39,27,76,1540059223,"~/server.js"
--'  27  76  ~/server.js
-|4,39,27,76,1540059223,"~/server.js"
--'  27  76  ~/server.js
-|4,39,27,76,1540059223,"~/server.js"
--'  27  76  ~/server.js
-|4,39,27,76,1540059223,"~/server.js"
--'  27  76  ~/server.js
-|4,39,27,76,1540059223,"~/server.js"
--'  27  76  ~/server.js
-|4,39,27,76,1540059223,"~/server.js"
--'  27  76  ~/server.js
-|4,39,27,76,1540059223,"~/server.js"
--'  27  76  ~/server.js
-|4,39,27,76,1540059223,"~/server.js"
--'  27  76  ~/server.js
-|4,39,27,76,1540059223,"~/server.js"
--'  27  76  ~/server.js
-|4,39,27,76,1540059223,"~/server.js"
--'  27  76  ~/server.js
-|4,39,27,76,1540059223,"~/server.js"
--'  27  76  ~/server.js
-|4,39,27,76,1540059223,"~/server.js"
--'  27  76  ~/server.js
-|4,39,27,76,1540059223,"~/server.js"
--'  27  76  ~/server.js
-|4,39,27,76,1540059223,"~/server.js"
--'  27  76  ~/server.js
-|4,39,27,76,1540059223,"~/server.js"
--'  27  76  ~/server.js
-|4,39,27,76,1540059223,"~/server.js"
--'  1  75  ~/server.js
-|4,39,1,75,1540059215,"~/server.js"
--'  1  75  ~/server.js
-|4,39,1,75,1540059215,"~/server.js"
--'  1  75  ~/server.js
-|4,39,1,75,1540059215,"~/server.js"
--'  1  75  ~/server.js
-|4,39,1,75,1540059215,"~/server.js"
--'  1  75  ~/server.js
-|4,39,1,75,1540059215,"~/server.js"
--'  1  75  ~/server.js
-|4,39,1,75,1540059215,"~/server.js"
--'  1  75  ~/server.js
-|4,39,1,75,1540059215,"~/server.js"
--'  1  75  ~/server.js
-|4,39,1,75,1540059215,"~/server.js"
--'  1  75  ~/server.js
-|4,39,1,75,1540059215,"~/server.js"
--'  1  75  ~/server.js
-|4,39,1,75,1540059215,"~/server.js"
--'  1  75  ~/server.js
-|4,39,1,75,1540059215,"~/server.js"
--'  1  75  ~/server.js
-|4,39,1,75,1540059215,"~/server.js"
--'  1  75  ~/server.js
-|4,39,1,75,1540059215,"~/server.js"
 
 # History of marks within files (newest to oldest):
 
+> ~/.gitignore
+	*	1540139358	0
+	"	5	12
+	^	5	13
+	.	5	12
+	+	5	12
+
 > ~/README.md
 	*	1540077973	0
-	"	1	0
-
-> ~/.gitignore
-	*	1540077755	0
 	"	1	0
 
 > ~/hooks/post-update.sample
