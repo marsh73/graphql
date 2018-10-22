@@ -7,11 +7,14 @@
     "apollo-datasource-rest": "^0.1.5",
     "apollo-server": "^2.1.0",
     "apollo-server-express": "^2.1.0",
+    "axios": "^0.18.0",
+    "babel-core": "^6.26.3",
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
     "express-graphql": "^0.6.12",
     "graphql": "^14.0.2",
-    "graphql-tools": "^4.0.2"
+    "graphql-tools": "^4.0.2",
+    "request-promise": "^4.2.2"
   },
   "devDependencies": {},
   "scripts": {

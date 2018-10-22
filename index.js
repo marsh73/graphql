@@ -2,6 +2,9 @@ const {
   ApolloServer,
   gql
 } = require('apollo-server');
+const axios = require('axios')
+const API_KEY = 'f672d58caad3aa92f52f3975f451307e44dcec85084d7194403f829c92425d2a';
+axios.defaults.headers.common = { 'Authorization': "bearer " + API_KEY }
 
 // This is a (sample) collection of books we'll be able to query
 // the GraphQL server for.  A more complete example might fetch
@@ -17,11 +20,11 @@ const books = [{
 ];
 
 const peeps = [{
-  name: 'marsh',
-},
-{
-  name: 'cat',
-},
+    name: 'marsh',
+  },
+  {
+    name: 'cat',
+  },
 ];
 
 // Type definitions define the "shape" of your data and specify
@@ -39,11 +42,18 @@ const typeDefs = gql`
     name: String
   }
 
+  type Droplet {
+    name: String
+    id: String
+  }
+
   # The "Query" type is the root of all GraphQL queries.
   # (A "Mutation" type will be covered later on.)
   type Query {
     books: [Book]
     peeps: [Peep]
+    hello: String
+    dropletList: [Droplet]
   }
 `;
 
@@ -52,7 +62,13 @@ const typeDefs = gql`
 const resolvers = {
   Query: {
     books: () => books,
-    peeps: () => peeps
+    peeps: () => peeps,
+    hello: () =>
+      axios.get('https://fourtonfish.com/hellosalut/?mode=auto')
+        .then(res => res.data.hello),
+    dropletList: () =>
+      axios.get('https://api.digitalocean.com/v2/droplets')
+        .then(res => res.data.droplets),
   },
 };
 
