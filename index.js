@@ -4,43 +4,20 @@ const {
 } = require('apollo-server');
 const axios = require('axios')
 const { DO_KEY } = require('./env');
-axios.defaults.headers.common = { 'Authorization': "bearer " + DO_KEY }
+const DO_API = axios.create({
+  baseURL: 'https://api.digitalocean.com/v2',
+  responseType: 'json'
+});
+DO_API.defaults.headers.common = { 'Authorization': "bearer " + DO_KEY }
+const CLOUD_API = axios.create({
+  baseURL: 'https://cloud.digitalocean.com/api/v1',
+  responseType: 'json'
+});
 
-// This is a (sample) collection of books we'll be able to query
-// the GraphQL server for.  A more complete example might fetch
-// from an existing data source like a REST API or database.
-const books = [{
-  title: 'Harry Potter and the Chamber of Secrets',
-  author: 'J.K. Rowling',
-},
-{
-  title: 'Jurassic Park',
-  author: 'Michael Crichton',
-},
-];
 
-const peeps = [{
-    name: 'marsh',
-  },
-  {
-    name: 'cat',
-  },
-];
 
-// Type definitions define the "shape" of your data and specify
-// which ways the data can be fetched from the GraphQL server.
 const typeDefs = gql`
   # Comments in GraphQL are defined with the hash (#) symbol.
-
-  # This "Book" type can be used in other type declarations.
-  type Book {
-    title: String
-    author: String
-  }
-
-  type Peep {
-    name: String
-  }
 
   type Droplet {
     name: String
@@ -51,13 +28,16 @@ const typeDefs = gql`
     memory: Int
   }
 
+  type Volume {
+    name: String
+    id: String
+  }
+
   # The "Query" type is the root of all GraphQL queries.
   # (A "Mutation" type will be covered later on.)
   type Query {
-    books: [Book]
-    peeps: [Peep]
-    hello: String
     dropletList: [Droplet]
+    volumeList: [Volume]
   }
 `;
 
@@ -65,14 +45,12 @@ const typeDefs = gql`
 // schema.  We'll retrieve books from the "books" array above.
 const resolvers = {
   Query: {
-    books: () => books,
-    peeps: () => peeps,
-    hello: () =>
-      axios.get('https://fourtonfish.com/hellosalut/?mode=auto')
-        .then(res => res.data.hello),
     dropletList: () =>
-      axios.get('https://api.digitalocean.com/v2/droplets')
+      DO_API.get('/droplets')
         .then(res => res.data.droplets),
+    volumeList: () =>
+      DO_API.get('/volumes')
+        .then(res => res.data.volumes),
   },
 };
 
