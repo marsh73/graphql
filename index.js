@@ -3,8 +3,8 @@ const {
   gql
 } = require('apollo-server');
 const axios = require('axios')
-const API_KEY = 'f672d58caad3aa92f52f3975f451307e44dcec85084d7194403f829c92425d2a';
-axios.defaults.headers.common = { 'Authorization': "bearer " + API_KEY }
+const { DO_KEY } = require('./env');
+axios.defaults.headers.common = { 'Authorization': "bearer " + DO_KEY }
 
 // This is a (sample) collection of books we'll be able to query
 // the GraphQL server for.  A more complete example might fetch
