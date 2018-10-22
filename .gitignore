@@ -3,3 +3,4 @@
 /.npm
 /.ssh
 .bash_history
+.env
