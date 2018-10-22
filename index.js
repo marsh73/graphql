@@ -45,6 +45,10 @@ const typeDefs = gql`
   type Droplet {
     name: String
     id: String
+    disk: String
+    ip_address: String
+    locked: Boolean
+    memory: Int
   }
 
   # The "Query" type is the root of all GraphQL queries.
