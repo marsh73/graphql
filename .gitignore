@@ -4,3 +4,4 @@
 /.ssh
 .bash_history
 .env
+env.js
