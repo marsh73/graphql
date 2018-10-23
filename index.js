@@ -27,11 +27,35 @@ const typeDefs = gql`
     id: String
   }
 
+  type Pagination {
+    current_page: Int
+    next_page: Int
+    offset: Int
+    pages: Int
+    per_page: Int
+    previous_page: Int
+    total: Int
+  }
+
+  type Meta {
+    total: Int
+  }
+
+  type DropletList {
+    droplets: [Droplet]
+    meta: Meta
+  }
+
+  type VolumeList {
+    volumes: [Volume]
+    meta: Meta
+  }
+
   # The "Query" type is the root of all GraphQL queries.
   # (A "Mutation" type will be covered later on.)
   type Query {
-    dropletList: [Droplet]
-    volumeList: [Volume]
+    dropletList: DropletList
+    volumeList: VolumeList
   }
 `;
 
@@ -41,10 +65,12 @@ const resolvers = {
   Query: {
     dropletList: () =>
       DO_API.get('/droplets')
-        .then(res => res.data.droplets),
+        .then(res => res.data),
     volumeList: () =>
       DO_API.get('/volumes')
-        .then(res => res.data.volumes),
+        .then(res => {
+          return res.data;
+        }),
   },
 };
 
