@@ -9,12 +9,6 @@ const DO_API = axios.create({
   responseType: 'json'
 });
 DO_API.defaults.headers.common = { 'Authorization': "bearer " + DO_KEY }
-const CLOUD_API = axios.create({
-  baseURL: 'https://cloud.digitalocean.com/api/v1',
-  responseType: 'json'
-});
-
-
 
 const typeDefs = gql`
   # Comments in GraphQL are defined with the hash (#) symbol.
