@@ -10,6 +10,8 @@
     "axios": "^0.18.0",
     "babel-core": "^6.26.3",
     "body-parser": "^1.18.3",
+    "cookie-parser": "^1.4.3",
+    "cors": "^2.8.4",
     "express": "^4.16.4",
     "express-graphql": "^0.6.12",
     "graphql": "^14.0.2",

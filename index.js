@@ -1,8 +1,8 @@
-const {
-  ApolloServer,
-  gql
-} = require('apollo-server');
-const axios = require('axios')
+const { ApolloServer, gql } = require('apollo-server-express');
+const express = require('express');
+const cors = require('cors');
+const axios = require('axios');
+const cookieParser = require('cookie-parser');
 const { DO_KEY } = require('./env');
 const DO_API = axios.create({
   baseURL: 'https://api.digitalocean.com/v2',
@@ -59,33 +59,35 @@ const typeDefs = gql`
   }
 `;
 
-// Resolvers define the technique for fetching the types in the
-// schema.  We'll retrieve books from the "books" array above.
 const resolvers = {
   Query: {
     dropletList: () =>
       DO_API.get('/droplets')
         .then(res => res.data),
-    volumeList: () =>
+    volumeList: (parent, args, context, info) =>
       DO_API.get('/volumes')
         .then(res => {
-          return res.data;
+          console.log('1', arguments[0], res);
+          console.log('2', arguments[1]);
+          return 'hello';
         }),
   },
 };
 
-// In the most basic sense, the ApolloServer can be started
-// by passing type definitions (typeDefs) and the resolvers
-// responsible for fetching the data for those types.
 const server = new ApolloServer({
   typeDefs,
   resolvers
 });
 
-// This `listen` method launches a web-server.  Existing apps
-// can utilize middleware options, which we'll discuss later.
-server.listen().then(({
-  url
-}) => {
-  console.log(`🚀  Server ready at ${url}`);
-});
+const app = express();
+
+app.use(cors());
+app.use(cookieParser());
+
+server.applyMiddleware({ app });
+
+app.listen({ port: 4000 }, () =>
+  console.log(`🚀 Server ready at http://localhost:4000${server.graphqlPath}`)
+);
+
+
