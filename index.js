@@ -1,6 +1,7 @@
 const { ApolloServer, gql } = require('apollo-server-express');
 // const { ApolloServer, gql } = require('apollo-server');
 const express = require('express');
+const https = require('https');
 const cors = require('cors');
 const axios = require('axios');
 const cookieParser = require('cookie-parser');
@@ -40,7 +41,7 @@ const typeDefs = gql`
   }
 
   type Meta {
-    total: Int
+    pagination: Pagination
   }
 
   type DropletList {
@@ -50,7 +51,6 @@ const typeDefs = gql`
 
   type VolumeList {
     volumes: [Volume]
-    meta: Meta
   }
 
   # The "Query" type is the root of all GraphQL queries.
@@ -63,16 +63,19 @@ const typeDefs = gql`
 `;
 
 const doSessionKey = '_digitalocean2_session_v4';
-const doSessionId = 'dGtGOWtDOXpORGFHZjloTmtHT2d1OTFZb1N6YTNHVjg2cVpnV1N5bnpmNEw1QXFQN3ZEWkg1MXZ6cm1tdEU5Z21JNFVwbFNlUmN0cVFUbVhWNFVkeVE5TmozcWFwTndMRktDeHYzK3lWZTdxT3VHV1Jqd2JTT0VUUmtlVGtOeWxMUmQwUUpGV09ZMURuelV0aHdmMUdPTk9HeVZublJxOU1xOHdGNDlDM3ZLZUdvZ0NYRGplTzNscXFPTk4weTdjMko4RlF1bHpuaXZxRy96ZUpvS0FuSW9ZTThOclhuVktuOEVxdDFNNkZmOEdkSlRFV3ZKUHovN3FsZXVDcmdHQVFwVnhJczMyVXhyQmdoeFR3RzFROFdBK3JTeThPOCs4WXZ5bXdYYVpDZzQ4Z1VTQkg1dXY1bEYxYUVZUkxOckxnYzNnNE8xenpCdU8yMS9lUjJUTTlyNU16Q0J0TG51YVh5bTJwTWlnaE94d0Y5aDZXLzFYb1hBUUF2N21xNmVScml4eFpGOENSRDZvYXBGa1c5ZDlkNVJBdXlNQnptcW4xRlhVdDlnR2NsLzJWVXp4dEI0aVJmNjFYZmI5ZThMUkJOMjZxRmFFTDRhNm5oVWM0bUxCeWM1NFFqVzRvMzU4REhWbXVmNjJuSlY1YXdjRE1PNWNHbXFETzRnYk5aaHZyLzdtNE91K0lKMEVnL1M5R0dmcS9XUGdrQiswc255YXZZZjlaUkRXL1UrTno2bGdTVGNoQXNCaHNDN3JiYnkrRmRNTEUwQklnQmFMS2FWNkxMMlBwc0pFa1AxVHAxWlNoVCs3ZFpKUVVsSHkvOUtYQU1rTG9DQnJvMkczRkJ3ZkpCUHFLN1ZZN2ZBUmh6eFBRaURDZ3RnY2ZRbkxOZ01HcVgzamhqWHJvaWtMODVmVTl0alRiZ2gzbXdpN2ZRTy8zMU1HTDJEQllwZlEvblRHOS9ad3Z4aGxJSENSN1BlMldGNWlVeEozV1hnWis1UTV6NFZXYnlhbnZvRFJMbXlQY2s1cHg2cG9ITm9PUHlVMHlUZHJZNlJOZDZ6blp5YXhVSVlXZSsvazBVK3JVMi9BMmJsM2hMT29lUktaVzJPYnk4Y2M2QlZ5SWptcmlMQXNOTkVyWXdtWkhYK2gvdS9sRnRQR2dSU2FHMCtrMFhmTm5EbVMzNGJUWkJsL21rV1JxVWIvcXB2Z3RJL0ZWcDZ5NVIyK05NVGt1aVZIU0IxVGNpTlhVRnRqSklVcFhzL3FtZ2p4UkYwZk9MZTJtcXlrLS1PYXRkQTRJSUJYemQ1ZWE2Y1dYQWRnPT0%3D--d3a2ec8e43fa6e99c78c1a4aa58503c227bd8ad3'
+const doSessionId = 'eWdlb1ZlZncwc2lsVmhrMWJpUnU0RlI5WVlVSzJ3dTY2YjJCeXpDeWM3Y2IyTURwYlFUak5nOE50c0Vtd1E4M3QrSkNjd1pqYlJ1VFcxU1dZNGJqS3J6L2llVWQzQ2ZmTjU2bU1IQ25SSGhXNGpsb0U5MmFST0Z0N3QvUFMybHR0WExjTTNraDV5WWQyMnJ2dExmNERvdGovbHdFSFR3aDVGSUtyelo1NGhJVUczREpmMklYVUM4SHcxK2hPQ0Nva0xReDROZ0FIRVBtUTJvbzdLS3hxUTVUQzFPaDZtTXNBTDBxeXpoNS9xeFFCU1o1a1ZadnR0bnNIdUdObjZDbyt1aXVlNzl6N2hENWh0WnljYUgyUEJ3Z0w4aDAvWklSdjFEUTltZytiRXlnWnhlc0JPR2V6NytwSFBJVzVxWWxMRUJONXhMcy9qZVUrRE80YkJaTWF4UUU5bFMzK1ZGdXJUUHc3cVlWY2pmbFdnNm13ajkwUWR1TGtQWWVNUFJEWmVxcDFqVWdPNWt2NVgvNnluYWUyMUR4ZlZlTVV6VjZjVDZJajhVTSt6dkdQeWd0QitadXBJRUlma09kWGVLZEQ2Vmgyc1dmZkRFV2o3SlZRTjN6RkhPdEwxaFo5ZVZKQnJhb0IvLzMwbGJSbDRvQ1dFZXNjL0liUU1tVEJiWVBZaVkxT1JYbEdnR1gvWlNYc2VmdGZ6Wi85QTgzUXd1Ny9ubXVxZVlOYWtIVjg5QTY3UjRiZFhwK0pRNzRFdDZtUjNsT2IvVmZ3WTM4Uitqd2NZTlg1ODdhMUNCd3dpZ2lxQ1hVV1pZRzNZQXRoU1FrVXlpQldFTUZCMEZUL1FTVk1oVHN3a3lwQzFiS2xxZG41K2JxbjFMbld1eExYaHExU2Z4NjlnRzZCZGxEalM5OHRIbEhlQlN4ajY2YnJFb1FGSkkwa2YvVXg0emFsSEp6bHBCTnRycFNWR2RlYUIwbnBOR2hINk15QkJsRnNQSGlhcU85M085YzcvMDJCUVdmRldOMEpUMVdCajB0azdmV3k3eFpibFAxeTZyTzczRHhzOHR0VVdEMGo3SCt6TFdYTDVFd21jaG5XWWYzNHYvTi0tcnpIVGJsNmZaeHc4R2ZobGkrY3FMQT09--e9682d61dfaacaf10d84b098021878c8f4f3cd72'
 
-function defaultHeaders() {
-  // let cs = Object.keys(cookies).reduce((p, c) => p + p + `${c}=${cookies[c]},`, '');
+function defaultHeaders(context) {
+  let cs = Object.keys(context.cookies).reduce((p, c) => p + p + `${c}=${cookies[c]},`, '');
   let cookie = `${doSessionKey}=${doSessionId}`;
+
   let headers = {
     'Accept': 'application/json',
     'Content-type': 'application/json',
     'Connection': 'keep-alive',
-    'Cookie':JSON.stringify(cookie)
+    'Accept-Language': 'en-US,en;q=0.9',
+    'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.67 Safari/537.36',
+    'Cookie': cookie
   };
 
   return headers;
@@ -80,14 +83,12 @@ function defaultHeaders() {
 
 const resolvers = {
   Query: {
-    dropletList: (parent, args, context, info) => {
-      let cs = defaultHeaders(context.cookies);
+    dropletList: (parent, args, context, info) =>
       DO_API.get('https://cloud.digitalocean.com/api/v1/droplets', {
-        headers: defaultHeaders()
+        headers: defaultHeaders(context)
       })
         .then(res => res.data)
-        .catch(err => console.log('errrrrr', err))
-        },
+        .catch(err => console.log('errrrrr', err)),
     volumeList: (parent, args, context, info) =>
       DO_API.get('https://api.digitalocean.com/v2/volumes', {
         headers: { 'Authorization': "bearer " + DO_KEY }
@@ -107,14 +108,15 @@ var corsOptions = {
   optionsSuccessStatus: 200,
   methods: ['GET', 'PUT', 'POST'],
   credentials: true,
-  allowedHeaders: 'x-cookie-session,cache,cookie,content-type,x-context-id,x-csrf-token,x-device-browser,x-device-operating-system,x-request-id'
+  allowedHeaders: 'user-agent,accept-language,x-cookie-session,cache,cookie,content-type,x-context-id,x-csrf-token,x-device-browser,x-device-operating-system,x-request-id'
 };
 
 const server = new ApolloServer({
   typeDefs,
   resolvers,
   context: ({ req }) => ({
-    cookies: req.cookies
+    cookies: req.cookies,
+    proxy_headers: req.headers
   })
 });
 
