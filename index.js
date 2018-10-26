@@ -112,6 +112,7 @@ var corsOptions = {
 };
 
 const server = new ApolloServer({
+  cors: false,
   typeDefs,
   resolvers,
   context: ({ req }) => ({
