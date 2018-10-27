@@ -7,9 +7,7 @@ const axios = require('axios');
 const cookieParser = require('cookie-parser');
 const { DO_KEY } = require('./env');
 const DO_API = axios.create({
-  baseURL: 'https://api.digitalocean.com/v2',
-  // baseURL: 'https://cloud.digitalocean.com/api/v1',
-  responseType: 'json'
+  baseURL: 'https://api.digitalocean.com/v2'
 });
 
 DO_API.defaults.headers.common = { 'Authorization': "bearer " + DO_KEY }
@@ -23,6 +21,17 @@ const typeDefs = gql`
     ip_address: String
     locked: Boolean
     memory: Int
+  }
+
+  type Project {
+    id: ID
+    owner_uuid: ID
+    owner_id: Int
+    name: String
+    description: String
+    purpose: String
+    environment: String
+    is_default: Boolean
   }
 
   type Account {
@@ -64,12 +73,18 @@ const typeDefs = gql`
     meta: Meta
   }
 
+  type ProjectList {
+    projects: [Project]
+    meta: Meta
+  }
+
   # The "Query" type is the root of all GraphQL queries.
   # (A "Mutation" type will be covered later on.)
   type Query {
     dropletList: DropletList
     volumeList: VolumeList
     account: Account
+    projectList: ProjectList
   }
 `;
 
@@ -94,21 +109,10 @@ function defaultHeaders(context) {
 
 const resolvers = {
   Query: {
-    // dropletList: (parent, args, context, info) =>
-    //   DO_API.get('/droplets', {
-    //     headers: defaultHeaders(context)
-    //   })
-    //     .then(res => res.data)
-    //     .catch(err => console.log('errrrrr', err)),
-    // volumeList: (parent, args, context, info) =>
-    //   DO_API.get('/volumes', {
-    //     headers: defaultHeaders(context)
-    //   })
-    //     .then(res => res.data)
-    //     .catch(err => console.log('errrrrr', err)),
     dropletList: () => DO_API.get('/droplets').then(res => res.data).catch(err => err),
     volumeList: () => DO_API.get('/volumes').then(res => res.data).catch(err => err),
     account: () => DO_API.get('/account').then(res => res.data.account).catch(err => err),
+    projectList: () => DO_API.get('/projects').then(res => res.data).catch(err => err),
   },
 };
 
