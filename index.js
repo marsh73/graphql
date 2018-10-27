@@ -7,12 +7,12 @@ const axios = require('axios');
 const cookieParser = require('cookie-parser');
 const { DO_KEY } = require('./env');
 const DO_API = axios.create({
-  // baseURL: 'https://api.digitalocean.com/v2',
+  baseURL: 'https://api.digitalocean.com/v2',
   // baseURL: 'https://cloud.digitalocean.com/api/v1',
   responseType: 'json'
 });
 
-// DO_API.defaults.headers.common = { 'Authorization': "bearer " + DO_KEY }
+DO_API.defaults.headers.common = { 'Authorization': "bearer " + DO_KEY }
 
 const typeDefs = gql`
 
@@ -41,7 +41,8 @@ const typeDefs = gql`
   }
 
   type Meta {
-    pagination: Pagination
+ #   pagination: Pagination
+    total: String
   }
 
   type DropletList {
@@ -51,6 +52,7 @@ const typeDefs = gql`
 
   type VolumeList {
     volumes: [Volume]
+    meta: Meta
   }
 
   # The "Query" type is the root of all GraphQL queries.
@@ -84,18 +86,16 @@ function defaultHeaders(context) {
 const resolvers = {
   Query: {
     dropletList: (parent, args, context, info) =>
-      DO_API.get('https://cloud.digitalocean.com/api/v1/droplets', {
+      DO_API.get('/droplets', {
         headers: defaultHeaders(context)
       })
         .then(res => res.data)
         .catch(err => console.log('errrrrr', err)),
     volumeList: (parent, args, context, info) =>
-      DO_API.get('https://api.digitalocean.com/v2/volumes', {
-        headers: { 'Authorization': "bearer " + DO_KEY }
+      DO_API.get('/volumes', {
+        headers: defaultHeaders(context)
       })
-        .then(res => {
-          return res.data;
-        })
+        .then(res => res.data)
         .catch(err => console.log('errrrrr', err)),
     test: (parent, args, context, info) => {
       return 'testing';
