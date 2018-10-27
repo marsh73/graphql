@@ -25,6 +25,15 @@ const typeDefs = gql`
     memory: Int
   }
 
+  type Account {
+    uuid: ID
+    email: String
+    droplet_limit: Int
+    status: String
+    status_message: String
+    email_verified: Boolean
+  }
+
   type Volume {
     name: String
     id: String
@@ -60,7 +69,7 @@ const typeDefs = gql`
   type Query {
     dropletList: DropletList
     volumeList: VolumeList
-    test: String
+    account: Account
   }
 `;
 
@@ -85,21 +94,21 @@ function defaultHeaders(context) {
 
 const resolvers = {
   Query: {
-    dropletList: (parent, args, context, info) =>
-      DO_API.get('/droplets', {
-        headers: defaultHeaders(context)
-      })
-        .then(res => res.data)
-        .catch(err => console.log('errrrrr', err)),
-    volumeList: (parent, args, context, info) =>
-      DO_API.get('/volumes', {
-        headers: defaultHeaders(context)
-      })
-        .then(res => res.data)
-        .catch(err => console.log('errrrrr', err)),
-    test: (parent, args, context, info) => {
-      return 'testing';
-    },
+    // dropletList: (parent, args, context, info) =>
+    //   DO_API.get('/droplets', {
+    //     headers: defaultHeaders(context)
+    //   })
+    //     .then(res => res.data)
+    //     .catch(err => console.log('errrrrr', err)),
+    // volumeList: (parent, args, context, info) =>
+    //   DO_API.get('/volumes', {
+    //     headers: defaultHeaders(context)
+    //   })
+    //     .then(res => res.data)
+    //     .catch(err => console.log('errrrrr', err)),
+    dropletList: () => DO_API.get('/droplets').then(res => res.data).catch(err => err),
+    volumeList: () => DO_API.get('/volumes').then(res => res.data).catch(err => err),
+    account: () => DO_API.get('/account').then(res => res.data.account).catch(err => err),
   },
 };
 
